@@ -1,26 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { OPERATORS } from "./CONSTANTS";
+import Display from "./components/Display";
+import Buttons from "./components/Buttons";
 import './App.css';
 
 function App() {
+    const [currentValue, setCurrentValue] = useState('')
+
+    const equalsTo = () => {
+        try {
+            setCurrentValue(eval(currentValue.replace('x', '*')))
+        }
+        catch {
+            setCurrentValue('Ошибка')
+            setTimeout(() => {
+                setCurrentValue('0')
+            }, 1000)
+        }
+    }
+    const resetValue = () => {
+        setCurrentValue('')
+    }
+    const reverseValue = () => {
+        setCurrentValue(prev => (+prev * -1).toString())
+    }
+    const getPercent = () => {
+        setCurrentValue(prev => (+prev / 100).toString())
+    }
+
+    const setValue = (val: string) => {
+        if (currentValue === '0') {
+            setCurrentValue('')
+        }
+
+        switch (val) {
+            case OPERATORS.EQUALS: {
+                equalsTo()
+                break
+            }
+            case OPERATORS.RESET: {
+                resetValue()
+                break
+            }
+            case OPERATORS.REVERSE: {
+                reverseValue()
+                break
+            }
+            case OPERATORS.PERCENT: {
+                getPercent()
+                break
+            }
+            default: {
+                setCurrentValue(prev => prev + val)
+            }
+        }
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="container">
+          <div className="calculator">
+              <Display currentValue={currentValue} />
+              <Buttons setValue={setValue}/>
+          </div>
+      </div>
+  )
 }
 
 export default App;
