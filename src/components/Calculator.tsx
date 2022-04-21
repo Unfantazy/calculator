@@ -5,8 +5,8 @@ import { AppRootStateType } from "../app/store"
 import { clear, evaluateData, percent, reverse } from "../reducers/calculator-reducer"
 import OperationButton from "./OperationButton"
 import DigitButton from "./DigitButton"
-import {operationsCollectionRef} from "../App"
-import {evaluate} from "../utils/utils"
+import { operationsCollectionRef } from "../App"
+import { evaluate } from "../utils/utils"
 
 const Calculator = () => {
     const dispatch = useDispatch()
