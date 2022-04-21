@@ -16,7 +16,12 @@ type CalculatorStateType = {
     previousOperand: string | null
 }
 
-const initialState: any = {}
+const initialState: CalculatorStateType = {
+    currentOperand: '0',
+    overwrite: false,
+    operation: null,
+    previousOperand: null
+}
 
 export const calculatorReducer = (state: CalculatorStateType = initialState, action: ActionsType) => {
     console.log(action)
@@ -119,4 +124,4 @@ export const percent = () => ({ type: ACTIONS.PERCENT })
 export const reverse = () => ({ type: ACTIONS.REVERSE })
 
 
-type ActionsType = any
+type ActionsType = { type: string, digit?: string, operation?: string }
