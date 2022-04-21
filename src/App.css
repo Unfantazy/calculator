@@ -55,3 +55,7 @@ html {
 .orange {
   background-color:orange;
 }
+
+.loader img {
+  width: 100px;
+}
