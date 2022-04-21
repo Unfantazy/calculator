@@ -1,9 +1,10 @@
 import React from 'react'
+import { collection } from "firebase/firestore"
+
+import { db } from "./firebase/firebase-config"
 import './App.css'
 import Calculator from "./components/Calculator"
 import OperationsInfo from "./components/OperationsInfo"
-import { collection } from "firebase/firestore"
-import { db } from "./firebase/firebase-config"
 
 export const operationsCollectionRef = collection(db, 'operations')
 

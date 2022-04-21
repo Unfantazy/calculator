@@ -1,12 +1,14 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addDoc } from "firebase/firestore"
+
 import { AppRootStateType } from "../app/store"
 import { clear, evaluateData, percent, reverse } from "../reducers/calculator-reducer"
-import OperationButton from "./OperationButton"
-import DigitButton from "./DigitButton"
 import { operationsCollectionRef } from "../App"
 import { evaluate } from "../utils/utils"
+
+import OperationButton from "./OperationButton"
+import DigitButton from "./DigitButton"
 
 const Calculator = () => {
     const dispatch = useDispatch()
@@ -19,6 +21,11 @@ const Calculator = () => {
             operation: `${previousOperand} ${operation} ${currentOperand} = ${total}`,
             date: new Date()
         })
+    }
+
+    const evaluateTotal = () => {
+        createLineInDB()
+        dispatch(evaluateData())
     }
 
     return <div className="calculator">
@@ -48,10 +55,7 @@ const Calculator = () => {
             <OperationButton operation="+" dispatch={dispatch} />
             <DigitButton digit="0" dispatch={dispatch} className="span-2"/>
             <DigitButton digit="." dispatch={dispatch} />
-            <button onClick={() => {
-                createLineInDB()
-                dispatch(evaluateData())
-            }} className="orange btn">
+            <button onClick={evaluateTotal} className="orange btn">
                 =
             </button>
         </div>

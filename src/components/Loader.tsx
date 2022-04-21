@@ -1,3 +1,4 @@
+import React from "react"
 // @ts-ignore
 import loader from '../images/loader.gif'
 

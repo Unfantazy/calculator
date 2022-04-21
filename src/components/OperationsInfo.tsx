@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { getDocs } from "firebase/firestore"
+
 import { formatDateTime } from "../utils/utils"
 import { operationsCollectionRef } from "../App"
 import Loader from "./Loader";

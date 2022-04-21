@@ -1,9 +1,11 @@
 import React from "react"
+import { Dispatch } from "redux";
+
 import { chooseOperation } from "../reducers/calculator-reducer"
 
 type Props = {
     operation: string
-    dispatch: any
+    dispatch: Dispatch
 }
 
 const OperationButton = ({ dispatch, operation }: Props) => {
