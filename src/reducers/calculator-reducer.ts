@@ -24,7 +24,6 @@ const initialState: CalculatorStateType = {
 }
 
 export const calculatorReducer = (state: CalculatorStateType = initialState, action: ActionsType) => {
-    console.log(action)
     switch (action.type) {
         case ACTIONS.ADD_DIGIT:
             if (state.overwrite) {
