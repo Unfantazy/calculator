@@ -1,5 +1,5 @@
-import React from "react";
-import { chooseOperation } from "../reducers/calculator-reducer";
+import React from "react"
+import { chooseOperation } from "../reducers/calculator-reducer"
 
 type Props = {
     operation: string

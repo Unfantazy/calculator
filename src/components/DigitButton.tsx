@@ -1,5 +1,5 @@
-import React from "react";
-import { addDigit } from "../reducers/calculator-reducer";
+import React from "react"
+import { addDigit } from "../reducers/calculator-reducer"
 
 const DigitButton = ({ dispatch, digit, className = '' }: any) => {
     return (

@@ -1,4 +1,4 @@
-import { evaluate } from "../utils/utils";
+import { evaluate } from "../utils/utils"
 
 export const ACTIONS = {
     ADD_DIGIT: "ADD-DIGIT",

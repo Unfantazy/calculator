@@ -1,51 +1,17 @@
-import React  from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { AppRootStateType } from "./app/store";
-import { clear, evaluateData, percent, reverse } from "./reducers/calculator-reducer";
-import DigitButton from "./components/DigitButton";
-import OperationButton from "./components/OperationButton";
-import './App.css';
+import React from 'react'
+import './App.css'
+import Calculator from "./components/Calculator"
+import OperationsInfo from "./components/OperationsInfo"
+import { collection } from "firebase/firestore"
+import { db } from "./firebase/firebase-config"
+
+export const operationsCollectionRef = collection(db, 'operations')
 
 const App = () => {
-    const dispatch = useDispatch()
-    const { currentOperand = '0' } = useSelector((state: AppRootStateType) => state.calculator)
-
-    return (
-      <div className="container">
-          <div className="calculator">
-              <input type="text" className="calculator__text" value={currentOperand} />
-              <div className="calculator__buttons">
-                  <button onClick={() => dispatch(clear())} className="btn">
-                      AC
-                  </button>
-                  <button onClick={() => dispatch(reverse())} className="btn">
-                      +/-
-                  </button>
-                  <button onClick={() => dispatch(percent())} className="btn">
-                    %
-                  </button>
-                  <OperationButton operation="÷" dispatch={dispatch} />
-                  <DigitButton digit="7" dispatch={dispatch} />
-                  <DigitButton digit="8" dispatch={dispatch} />
-                  <DigitButton digit="9" dispatch={dispatch} />
-                  <OperationButton operation="*" dispatch={dispatch} />
-                  <DigitButton digit="4" dispatch={dispatch} />
-                  <DigitButton digit="5" dispatch={dispatch} />
-                  <DigitButton digit="6" dispatch={dispatch} />
-                  <OperationButton operation="-" dispatch={dispatch} />
-                  <DigitButton digit="1" dispatch={dispatch} />
-                  <DigitButton digit="2" dispatch={dispatch} />
-                  <DigitButton digit="3" dispatch={dispatch} />
-                  <OperationButton operation="+" dispatch={dispatch} />
-                  <DigitButton digit="0" dispatch={dispatch} className="span-2"/>
-                  <DigitButton digit="." dispatch={dispatch} />
-                  <button onClick={() => dispatch(evaluateData())} className="orange btn">
-                       =
-                  </button>
-                </div>
-          </div>
-      </div>
-  )
+    return <div className="container">
+        <Calculator/>
+        <OperationsInfo/>
+    </div>
 }
 
-export default App;
+export default App
