@@ -1,66 +1,48 @@
-import React, { useState } from 'react';
-import { OPERATORS } from "./CONSTANTS";
-import Display from "./components/Display";
-import Buttons from "./components/Buttons";
+import React  from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { AppRootStateType } from "./app/store";
+import { clear, evaluateData, percent, reverse } from "./reducers/calculator-reducer";
+import DigitButton from "./components/DigitButton";
+import OperationButton from "./components/OperationButton";
 import './App.css';
 
-function App() {
-    const [currentValue, setCurrentValue] = useState('')
+const App = () => {
+    const dispatch = useDispatch()
+    const { currentOperand = '0' } = useSelector((state: AppRootStateType) => state.calculator)
 
-    const equalsTo = () => {
-        try {
-            setCurrentValue(eval(currentValue.replace('x', '*')))
-        }
-        catch {
-            setCurrentValue('Ошибка')
-            setTimeout(() => {
-                setCurrentValue('0')
-            }, 1000)
-        }
-    }
-    const resetValue = () => {
-        setCurrentValue('')
-    }
-    const reverseValue = () => {
-        setCurrentValue(prev => (+prev * -1).toString())
-    }
-    const getPercent = () => {
-        setCurrentValue(prev => (+prev / 100).toString())
-    }
-
-    const setValue = (val: string) => {
-        if (currentValue === '0') {
-            setCurrentValue('')
-        }
-
-        switch (val) {
-            case OPERATORS.EQUALS: {
-                equalsTo()
-                break
-            }
-            case OPERATORS.RESET: {
-                resetValue()
-                break
-            }
-            case OPERATORS.REVERSE: {
-                reverseValue()
-                break
-            }
-            case OPERATORS.PERCENT: {
-                getPercent()
-                break
-            }
-            default: {
-                setCurrentValue(prev => prev + val)
-            }
-        }
-    }
-
-  return (
+    return (
       <div className="container">
           <div className="calculator">
-              <Display currentValue={currentValue} />
-              <Buttons setValue={setValue}/>
+              <input type="text" className="calculator__text" value={currentOperand} />
+              <div className="calculator__buttons">
+                  <button onClick={() => dispatch(clear())} className="btn">
+                      AC
+                  </button>
+                  <button onClick={() => dispatch(reverse())} className="btn">
+                      +/-
+                  </button>
+                  <button onClick={() => dispatch(percent())} className="btn">
+                    %
+                  </button>
+                  <OperationButton operation="÷" dispatch={dispatch} />
+                  <DigitButton digit="7" dispatch={dispatch} />
+                  <DigitButton digit="8" dispatch={dispatch} />
+                  <DigitButton digit="9" dispatch={dispatch} />
+                  <OperationButton operation="*" dispatch={dispatch} />
+                  <DigitButton digit="4" dispatch={dispatch} />
+                  <DigitButton digit="5" dispatch={dispatch} />
+                  <DigitButton digit="6" dispatch={dispatch} />
+                  <OperationButton operation="-" dispatch={dispatch} />
+                  <DigitButton digit="1" dispatch={dispatch} />
+                  <DigitButton digit="2" dispatch={dispatch} />
+                  <DigitButton digit="3" dispatch={dispatch} />
+                  <OperationButton operation="+" dispatch={dispatch} />
+                  <DigitButton digit="0" dispatch={dispatch} className="span-2"/>
+                  <DigitButton digit="." dispatch={dispatch} />
+                  <button onClick={() => dispatch(evaluateData())} className="orange btn">
+                       =
+                  </button>
+                </div>
           </div>
       </div>
   )
