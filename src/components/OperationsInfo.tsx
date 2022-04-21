@@ -20,10 +20,9 @@ const OperationsInfo = () => {
             // @ts-ignore
             setOperations(data.docs.map((doc) => ({...doc.data(), id: doc.id}) ))
         }
+
         getData()
     }, [])
-
-    console.log(operations)
 
     return  (
         <div className="info">
