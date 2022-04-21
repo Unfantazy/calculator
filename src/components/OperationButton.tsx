@@ -10,7 +10,7 @@ type Props = {
 
 const OperationButton = ({ dispatch, operation }: Props) => {
     return (
-        <button className="btn orange" onClick={() =>dispatch(chooseOperation(operation))}>
+        <button className="btn orange" onClick={() => dispatch(chooseOperation(operation))}>
             {operation}
         </button>
     )

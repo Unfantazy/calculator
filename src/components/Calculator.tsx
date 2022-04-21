@@ -12,7 +12,12 @@ import DigitButton from "./DigitButton"
 
 const Calculator = () => {
     const dispatch = useDispatch()
-    const { currentOperand = '0', previousOperand = null, operation } = useSelector((state: AppRootStateType) => state.calculator)
+
+    const {
+        currentOperand = '0',
+        previousOperand = null,
+        operation
+    } = useSelector((state: AppRootStateType) => state.calculator)
 
     const createLineInDB = async () => {
         const total = evaluate({ currentOperand, previousOperand, operation })
